@@ -93,7 +93,7 @@
             },
             {
               "name": "key",
-              "value": "AIzaSyDaFal_M9HtsiibgU0PbWye5lPr7ulrbFk"
+              "value": "tu api key"
             }
           ]
         },
@@ -143,7 +143,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer fc-2ffdbe7e566843eeb6c1ff88e2cea3ec"
+              "value": "Bearer tu api key"
             },
             {
               "name": "Content-Type",
