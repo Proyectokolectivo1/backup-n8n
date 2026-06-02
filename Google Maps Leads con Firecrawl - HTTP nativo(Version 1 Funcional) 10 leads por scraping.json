@@ -1,0 +1,769 @@
+{
+  "name": "Google Maps Leads con Firecrawl - HTTP nativo",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "ae3e7aae-67ec-42f2-b988-80cab8a3f04a",
+        "formTitle": "Buscar leads",
+        "formDescription": "Digite una busqueda como: clinicas saludables en medellin",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "busqueda",
+              "requiredField": true
+            }
+          ]
+        },
+        "responseMode": "lastNode",
+        "options": {
+          "buttonLabel": "Buscar leads"
+        }
+      },
+      "id": "63de4f8d-e769-43f1-9b9a-3b2589fc2482",
+      "name": "Formulario de busqueda",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        -48
+      ],
+      "webhookId": "ae3e7aae-67ec-42f2-b988-80cab8a3f04a"
+    },
+    {
+      "parameters": {
+        "url": "https://maps.googleapis.com/maps/api/place/textsearch/json",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "query",
+              "value": "={{ $json.busqueda }}"
+            },
+            {
+              "name": "language",
+              "value": "es"
+            },
+            {
+              "name": "key",
+              "value": "AIzaSyDaFal_M9HtsiibgU0PbWye5lPr7ulrbFk"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "484311f1-70e4-4120-8dbe-50000209cf0d",
+      "name": "Google Places - Buscar",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        0,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nconst busqueda = $('Formulario de busqueda').first().json.busqueda;\n\nif (response.status && response.status !== 'OK' && response.status !== 'ZERO_RESULTS') {\n  throw new Error(`Google Places Text Search fallo: ${response.status}${response.error_message ? ` - ${response.error_message}` : ''}`);\n}\n\nreturn (response.results || []).slice(0, 10).map((place) => ({\n  json: {\n    busqueda,\n    place_id: place.place_id,\n    nombre_preliminar: place.name || '',\n    direccion_preliminar: place.formatted_address || '',\n    tipos_preliminares: place.types || []\n  }\n}));"
+      },
+      "id": "8b1a4597-5ff2-4848-9327-eeb62ae04d75",
+      "name": "Separar resultados",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://maps.googleapis.com/maps/api/place/details/json",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "place_id",
+              "value": "={{ $json.place_id }}"
+            },
+            {
+              "name": "language",
+              "value": "es"
+            },
+            {
+              "name": "fields",
+              "value": "name,formatted_address,website,formatted_phone_number,url,business_status,types,rating,user_ratings_total"
+            },
+            {
+              "name": "key",
+              "value": "AIzaSyDaFal_M9HtsiibgU0PbWye5lPr7ulrbFk"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "89ce3afb-557c-496c-a297-56e2a6d03ec1",
+      "name": "Google Places - Detalles",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const detailItems = $input.all();\nconst baseItems = $('Separar resultados').all();\n\nreturn detailItems.map((item, index) => {\n  const base = baseItems[index]?.json || {};\n  const response = item.json;\n\n  if (response.status && response.status !== 'OK') {\n    throw new Error(`Google Places Details fallo para ${base.place_id || 'place_id desconocido'}: ${response.status}${response.error_message ? ` - ${response.error_message}` : ''}`);\n  }\n\n  const details = response.result || {};\n\n  return {\n    json: {\n      busqueda: base.busqueda || '',\n      place_id: base.place_id || '',\n      nombre_negocio: details.name || base.nombre_preliminar || '',\n      direccion: details.formatted_address || base.direccion_preliminar || '',\n      telefono: details.formatted_phone_number || '',\n      sitio_web: details.website || '',\n      google_maps: details.url || '',\n      rating: details.rating || '',\n      total_resenas: details.user_ratings_total || '',\n      estado: details.business_status || '',\n      categorias: (details.types || base.tipos_preliminares || []).join(', ')\n    }\n  };\n});"
+      },
+      "id": "557f2451-d57e-4417-b523-b4640ad48c39",
+      "name": "Preparar detalles",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $input.all().map((item) => ({\n  json: {\n    ...item.json,\n    firecrawl_url: item.json.sitio_web || 'https://example.com',\n    firecrawl_omitido: !item.json.sitio_web\n  }\n}));"
+      },
+      "id": "87db4e0b-a39e-4b5e-b17c-390974243b66",
+      "name": "Preparar Firecrawl",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.firecrawl.dev/v2/scrape",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer fc-2ffdbe7e566843eeb6c1ff88e2cea3ec"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"url\": \"{{ $json.firecrawl_url }}\",\n  \"formats\": [\"markdown\", \"links\"],\n  \"onlyMainContent\": false,\n  \"removeBase64Images\": true,\n  \"blockAds\": true,\n  \"proxy\": \"auto\",\n  \"timeout\": 30000,\n  \"maxAge\": 172800000\n}",
+        "options": {}
+      },
+      "id": "6fa2d3b8-0e8f-4500-b096-a5b10c415d7b",
+      "name": "Firecrawl - Scrape",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1200,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const scrapeItems = $input.all();\nconst baseItems = $('Preparar Firecrawl').all();\n\nfunction unique(values) {\n  return [...new Set(values.filter(Boolean).map((value) => String(value).trim()))];\n}\n\nfunction normalizeUrl(url) {\n  if (!url) return '';\n  if (url.startsWith('//')) return `https:${url}`;\n  if (/^https?:\\/\\//i.test(url)) return url;\n  return '';\n}\n\nfunction extractEmailAndSocials(text, links = []) {\n  const emails = unique((text.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}/gi) || [])\n    .map((email) => email.toLowerCase())\n    .filter((email) => !/\\.(png|jpe?g|webp|gif|svg)$/i.test(email)));\n\n  const hrefsFromText = (text.match(/https?:\\/\\/[^\\s)'\"<>]+/gi) || []).map((url) => url.replace(/[.,;]+$/, ''));\n  const allLinks = unique([...links, ...hrefsFromText].map(normalizeUrl));\n\n  return {\n    emails,\n    socials: {\n      facebook: allLinks.find((url) => /facebook\\.com/i.test(url)) || '',\n      instagram: allLinks.find((url) => /instagram\\.com/i.test(url)) || '',\n      linkedin: allLinks.find((url) => /linkedin\\.com/i.test(url)) || '',\n      x_twitter: allLinks.find((url) => /(twitter\\.com|x\\.com)/i.test(url)) || '',\n      youtube: allLinks.find((url) => /youtube\\.com|youtu\\.be/i.test(url)) || '',\n      tiktok: allLinks.find((url) => /tiktok\\.com/i.test(url)) || '',\n      whatsapp: allLinks.find((url) => /(wa\\.me|api\\.whatsapp\\.com|whatsapp\\.com)/i.test(url)) || ''\n    }\n  };\n}\n\nreturn scrapeItems.map((item, index) => {\n  const base = baseItems[index]?.json || {};\n  const payload = item.json.data || item.json || {};\n  const text = [payload.markdown, payload.html, payload.rawHtml].filter(Boolean).join('\\n');\n  const links = Array.isArray(payload.links) ? payload.links : [];\n  const extracted = base.firecrawl_omitido ? { emails: [], socials: {} } : extractEmailAndSocials(text, links);\n\n  return {\n    json: {\n      fecha: new Date().toISOString(),\n      busqueda: base.busqueda || '',\n      nombre_negocio: base.nombre_negocio || '',\n      direccion: base.direccion || '',\n      telefono: base.telefono || '',\n      correo: extracted.emails.join(', '),\n      sitio_web: base.sitio_web || '',\n      google_maps: base.google_maps || '',\n      facebook: extracted.socials.facebook || '',\n      instagram: extracted.socials.instagram || '',\n      linkedin: extracted.socials.linkedin || '',\n      x_twitter: extracted.socials.x_twitter || '',\n      youtube: extracted.socials.youtube || '',\n      tiktok: extracted.socials.tiktok || '',\n      whatsapp: extracted.socials.whatsapp || '',\n      rating: base.rating || '',\n      total_resenas: base.total_resenas || '',\n      estado: base.estado || '',\n      categorias: base.categorias || '',\n      firecrawl_estado: base.firecrawl_omitido ? 'omitido' : 'ok',\n      firecrawl_error: base.firecrawl_omitido ? 'Sin sitio web' : ''\n    }\n  };\n});"
+      },
+      "id": "7dcb9592-dc16-4572-a0be-8d132100837b",
+      "name": "Construir leads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "=1Hqy2eM1-tE9vyd3Sj-fGs6sifIEREksQK_AxF2xbWVs",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Hqy2eM1-tE9vyd3Sj-fGs6sifIEREksQK_AxF2xbWVs/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Fecha": "={{ $json.fecha }}",
+            "Busqueda": "={{ $json.busqueda }}",
+            "Nombre del negocio": "={{ $json.nombre_negocio }}",
+            "Direccion": "={{ $json.direccion }}",
+            "Telefono": "={{ $json.telefono }}",
+            "Correo": "={{ $json.correo }}",
+            "Sitio Web": "={{ $json.sitio_web }}",
+            "Google Maps": "={{ $json.google_maps }}",
+            "Facebook": "={{ $json.facebook }}",
+            "Instagram": "={{ $json.instagram }}",
+            "Linkedin": "={{ $json.linkedin }}",
+            "X (Twitter)": "={{ $json.x_twitter }}",
+            "Tiktok": "={{ $json.tiktok }}",
+            "Rating": "={{ $json.rating }}",
+            "Estado": "={{ $json.estado }}",
+            "Categorias": "={{ $json.categorias }}",
+            "Youtube": "={{ $json.youtube }}",
+            "Whatsapp": "={{ $json.whatsapp }}",
+            "Firecrawl estado": "={{ $json.firecrawl_estado }}",
+            "Firecrawl Error": "={{ $json.firecrawl_error }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Fecha",
+              "displayName": "Fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Busqueda",
+              "displayName": "Busqueda",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Nombre del negocio",
+              "displayName": "Nombre del negocio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Direccion",
+              "displayName": "Direccion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Telefono",
+              "displayName": "Telefono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Correo",
+              "displayName": "Correo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Sitio Web",
+              "displayName": "Sitio Web",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Google Maps",
+              "displayName": "Google Maps",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Facebook",
+              "displayName": "Facebook",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Instagram",
+              "displayName": "Instagram",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Linkedin",
+              "displayName": "Linkedin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "X (Twitter)",
+              "displayName": "X (Twitter)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Tiktok",
+              "displayName": "Tiktok",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Rating",
+              "displayName": "Rating",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Categorias",
+              "displayName": "Categorias",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Youtube",
+              "displayName": "Youtube",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Firecrawl estado",
+              "displayName": "Firecrawl estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Firecrawl Error",
+              "displayName": "Firecrawl Error",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Whatsapp",
+              "displayName": "Whatsapp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Total de reseñas",
+              "displayName": "Total de reseñas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "fecha",
+              "displayName": "fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "busqueda",
+              "displayName": "busqueda",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "nombre_negocio",
+              "displayName": "nombre_negocio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "direccion",
+              "displayName": "direccion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "telefono",
+              "displayName": "telefono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "correo",
+              "displayName": "correo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "sitio_web",
+              "displayName": "sitio_web",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "google_maps",
+              "displayName": "google_maps",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "facebook",
+              "displayName": "facebook",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "instagram",
+              "displayName": "instagram",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "linkedin",
+              "displayName": "linkedin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "x_twitter",
+              "displayName": "x_twitter",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "youtube",
+              "displayName": "youtube",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "tiktok",
+              "displayName": "tiktok",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "whatsapp",
+              "displayName": "whatsapp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "rating",
+              "displayName": "rating",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "total_resenas",
+              "displayName": "total_resenas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "estado",
+              "displayName": "estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "categorias",
+              "displayName": "categorias",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "firecrawl_estado",
+              "displayName": "firecrawl_estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "firecrawl_error",
+              "displayName": "firecrawl_error",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "a887e4ea-eca7-4210-9fe0-0e50c6e28932",
+      "name": "Guardar Leads en Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        1696,
+        -48
+      ],
+      "credentials": {
+        "googleApi": {
+          "id": "7PAhy9B0d1c3QGlQ",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Formulario de busqueda": {
+      "main": [
+        [
+          {
+            "node": "Google Places - Buscar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Places - Buscar": {
+      "main": [
+        [
+          {
+            "node": "Separar resultados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Separar resultados": {
+      "main": [
+        [
+          {
+            "node": "Google Places - Detalles",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Places - Detalles": {
+      "main": [
+        [
+          {
+            "node": "Preparar detalles",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar detalles": {
+      "main": [
+        [
+          {
+            "node": "Preparar Firecrawl",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Firecrawl": {
+      "main": [
+        [
+          {
+            "node": "Firecrawl - Scrape",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Firecrawl - Scrape": {
+      "main": [
+        [
+          {
+            "node": "Construir leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Construir leads": {
+      "main": [
+        [
+          {
+            "node": "Guardar Leads en Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "dd85604c-eec6-4079-b6e9-79d8d41c7b39",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e6129d2fc8c908cc255ab7ab3fcf457f63622dde7319e9328e5735fb600a31c9"
+  },
+  "id": "Z7L3YYIViJ83VKnx",
+  "tags": []
+}

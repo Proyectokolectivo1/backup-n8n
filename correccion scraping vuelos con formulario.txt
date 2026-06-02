@@ -1,0 +1,1136 @@
+{
+  "name": "Vuelos - Produccion v4 dropdown aeropuertos",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Configurar monitoreo de vuelo",
+        "formDescription": "Completa los datos del viaje. El sistema monitoreara precios y avisara por Telegram cuando encuentre una mejor opcion.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "nombre_cliente",
+              "fieldType": "text",
+              "requiredField": true,
+              "placeholder": "Juan Perez"
+            },
+            {
+              "fieldLabel": "origen",
+              "fieldType": "dropdown",
+              "requiredField": true,
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "BOG - Bogota - El Dorado"
+                  },
+                  {
+                    "option": "MDE - Medellin - Jose Maria Cordova"
+                  },
+                  {
+                    "option": "CLO - Cali - Alfonso Bonilla Aragon"
+                  },
+                  {
+                    "option": "CTG - Cartagena - Rafael Nunez"
+                  },
+                  {
+                    "option": "BAQ - Barranquilla - Ernesto Cortissoz"
+                  },
+                  {
+                    "option": "PEI - Pereira - Matecana"
+                  },
+                  {
+                    "option": "BGA - Bucaramanga - Palonegro"
+                  },
+                  {
+                    "option": "SMR - Santa Marta - Simon Bolivar"
+                  },
+                  {
+                    "option": "ADZ - San Andres - Gustavo Rojas Pinilla"
+                  },
+                  {
+                    "option": "LAX - Los Angeles - LAX"
+                  },
+                  {
+                    "option": "MIA - Miami - MIA"
+                  },
+                  {
+                    "option": "MAD - Madrid - Barajas"
+                  },
+                  {
+                    "option": "JFK - Nueva York - JFK"
+                  },
+                  {
+                    "option": "EWR - Nueva York/Newark - EWR"
+                  },
+                  {
+                    "option": "MEX - Ciudad de Mexico - MEX"
+                  },
+                  {
+                    "option": "CUN - Cancun - CUN"
+                  },
+                  {
+                    "option": "PTY - Panama - Tocumen"
+                  },
+                  {
+                    "option": "LIM - Lima - Jorge Chavez"
+                  },
+                  {
+                    "option": "SCL - Santiago de Chile - SCL"
+                  },
+                  {
+                    "option": "EZE - Buenos Aires - Ezeiza"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "destino",
+              "fieldType": "dropdown",
+              "requiredField": true,
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "BOG - Bogota - El Dorado"
+                  },
+                  {
+                    "option": "MDE - Medellin - Jose Maria Cordova"
+                  },
+                  {
+                    "option": "CLO - Cali - Alfonso Bonilla Aragon"
+                  },
+                  {
+                    "option": "CTG - Cartagena - Rafael Nunez"
+                  },
+                  {
+                    "option": "BAQ - Barranquilla - Ernesto Cortissoz"
+                  },
+                  {
+                    "option": "PEI - Pereira - Matecana"
+                  },
+                  {
+                    "option": "BGA - Bucaramanga - Palonegro"
+                  },
+                  {
+                    "option": "SMR - Santa Marta - Simon Bolivar"
+                  },
+                  {
+                    "option": "ADZ - San Andres - Gustavo Rojas Pinilla"
+                  },
+                  {
+                    "option": "LAX - Los Angeles - LAX"
+                  },
+                  {
+                    "option": "MIA - Miami - MIA"
+                  },
+                  {
+                    "option": "MAD - Madrid - Barajas"
+                  },
+                  {
+                    "option": "JFK - Nueva York - JFK"
+                  },
+                  {
+                    "option": "EWR - Nueva York/Newark - EWR"
+                  },
+                  {
+                    "option": "MEX - Ciudad de Mexico - MEX"
+                  },
+                  {
+                    "option": "CUN - Cancun - CUN"
+                  },
+                  {
+                    "option": "PTY - Panama - Tocumen"
+                  },
+                  {
+                    "option": "LIM - Lima - Jorge Chavez"
+                  },
+                  {
+                    "option": "SCL - Santiago de Chile - SCL"
+                  },
+                  {
+                    "option": "EZE - Buenos Aires - Ezeiza"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "fecha_salida",
+              "fieldType": "text",
+              "requiredField": true,
+              "placeholder": "2026-06-10"
+            },
+            {
+              "fieldLabel": "fecha_regreso",
+              "fieldType": "text",
+              "requiredField": true,
+              "placeholder": "2026-06-20"
+            },
+            {
+              "fieldLabel": "moneda",
+              "fieldType": "text",
+              "requiredField": true,
+              "placeholder": "COP"
+            },
+            {
+              "fieldLabel": "adultos",
+              "fieldType": "number",
+              "requiredField": true,
+              "placeholder": "1"
+            },
+            {
+              "fieldLabel": "ninos",
+              "fieldType": "number",
+              "requiredField": true,
+              "placeholder": "0"
+            },
+            {
+              "fieldLabel": "infantes_con_asiento",
+              "fieldType": "number",
+              "requiredField": true,
+              "placeholder": "0"
+            },
+            {
+              "fieldLabel": "infantes_en_brazos",
+              "fieldType": "number",
+              "requiredField": true,
+              "placeholder": "0"
+            },
+            {
+              "fieldLabel": "lleva_maletas",
+              "fieldType": "text",
+              "requiredField": true,
+              "placeholder": "si o no"
+            },
+            {
+              "fieldLabel": "maletas_de_mano",
+              "fieldType": "number",
+              "requiredField": true,
+              "placeholder": "0"
+            },
+            {
+              "fieldLabel": "max_escalas",
+              "fieldType": "number",
+              "requiredField": true,
+              "placeholder": "1"
+            },
+            {
+              "fieldLabel": "presupuesto_objetivo",
+              "fieldType": "number",
+              "requiredField": false,
+              "placeholder": "3200000"
+            },
+            {
+              "fieldLabel": "telefono_contacto",
+              "fieldType": "text",
+              "requiredField": true,
+              "placeholder": "+573001234567"
+            }
+          ]
+        },
+        "responseMode": "lastNode",
+        "options": {
+          "buttonLabel": "Activar monitoreo"
+        }
+      },
+      "id": "form-alta-ruta",
+      "name": "Formulario de alta",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2,
+      "position": [
+        -1500,
+        -220
+      ],
+      "webhookId": "alta-monitoreo-vuelos"
+    },
+    {
+      "parameters": {
+        "jsCode": "const j = $input.first().json;\nconst adultos = Number(j.adultos || 1);\nconst ninos = Number(j.ninos || 0);\nconst infantes_con_asiento = Number(j.infantes_con_asiento || 0);\nconst infantes_en_brazos = Number(j.infantes_en_brazos || 0);\nconst lleva_maletas = String(j.lleva_maletas || 'no').trim().toLowerCase();\nconst maletas_de_mano = lleva_maletas === 'si' ? Number(j.maletas_de_mano || 0) : 0;\nconst total_pasajeros = adultos + ninos + infantes_con_asiento + infantes_en_brazos;\nconst telefono_contacto = String(j.telefono_contacto || '').trim();\nif (adultos < 1) throw new Error('Debe existir al menos 1 adulto.');\nif (!['si','no'].includes(lleva_maletas)) throw new Error(\"El campo lleva_maletas debe ser 'si' o 'no'.\");\nif (maletas_de_mano > (adultos + ninos + infantes_con_asiento)) throw new Error('Las maletas de mano no pueden superar los pasajeros con derecho a equipaje de mano.');\nif (!telefono_contacto) throw new Error('Debes ingresar un numero de celular.');\nconst registro_token = Date.now().toString(36) + Math.random().toString(36).slice(2,10);\nconst bot_username = 'REEMPLAZA_CON_TU_BOT_USERNAME';\nconst enlace_vinculacion_telegram = 'https://t.me/' + bot_username + '?start=' + registro_token;\nreturn [{ json: {\n  nombre_cliente: j.nombre_cliente,\n  telefono_contacto,\n  origen_input: j.origen,\n  destino_input: j.destino,\n  fecha_salida: j.fecha_salida,\n  fecha_regreso: j.fecha_regreso,\n  moneda: j.moneda || 'COP',\n  adultos,\n  ninos,\n  infantes_con_asiento,\n  infantes_en_brazos,\n  total_pasajeros,\n  lleva_maletas,\n  maletas_de_mano,\n  max_escalas: Number(j.max_escalas ?? 99),\n  presupuesto_objetivo: j.presupuesto_objetivo ? Number(j.presupuesto_objetivo) : null,\n  chat_id_telegram: '',\n  telegram_vinculado: 'no',\n  registro_token,\n  enlace_vinculacion_telegram,\n  activa: 'si',\n  fecha_alta: new Date().toISOString()\n}}];"
+      },
+      "id": "normalizar-alta",
+      "name": "Normalizar alta",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1260,
+        -220
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const base = $('Normalizar alta').first().json;\n\nconst airportMap = {\n  BOG: { name: 'Bogota - Aeropuerto Internacional El Dorado', city: 'Bogota, Colombia' },\n  MDE: { name: 'Medellin - Aeropuerto Internacional Jose Maria Cordova', city: 'Medellin, Colombia' },\n  CLO: { name: 'Cali - Aeropuerto Internacional Alfonso Bonilla Aragon', city: 'Santiago de Cali, Colombia' },\n  CTG: { name: 'Cartagena - Aeropuerto Internacional Rafael Nunez', city: 'Cartagena, Colombia' },\n  BAQ: { name: 'Barranquilla - Aeropuerto Internacional Ernesto Cortissoz', city: 'Barranquilla, Colombia' },\n  PEI: { name: 'Pereira - Aeropuerto Internacional Matecana', city: 'Pereira, Colombia' },\n  BGA: { name: 'Bucaramanga - Aeropuerto Internacional Palonegro', city: 'Bucaramanga, Colombia' },\n  SMR: { name: 'Santa Marta - Aeropuerto Internacional Simon Bolivar', city: 'Santa Marta, Colombia' },\n  ADZ: { name: 'San Andres - Aeropuerto Internacional Gustavo Rojas Pinilla', city: 'San Andres, Colombia' },\n  LAX: { name: 'Los Angeles - Aeropuerto Internacional de Los Angeles', city: 'Los Angeles, Estados Unidos' },\n  MIA: { name: 'Miami - Aeropuerto Internacional de Miami', city: 'Miami, Estados Unidos' },\n  MAD: { name: 'Madrid - Aeropuerto Adolfo Suarez Madrid-Barajas', city: 'Madrid, Espana' },\n  JFK: { name: 'Nueva York - John F. Kennedy', city: 'Nueva York, Estados Unidos' },\n  EWR: { name: 'Nueva York/Newark - Newark Liberty', city: 'Newark, Estados Unidos' },\n  MEX: { name: 'Ciudad de Mexico - Benito Juarez', city: 'Ciudad de Mexico, Mexico' },\n  CUN: { name: 'Cancun - Aeropuerto Internacional de Cancun', city: 'Cancun, Mexico' },\n  PTY: { name: 'Panama - Tocumen', city: 'Panama, Panama' },\n  LIM: { name: 'Lima - Jorge Chavez', city: 'Lima, Peru' },\n  SCL: { name: 'Santiago de Chile - Arturo Merino Benitez', city: 'Santiago, Chile' },\n  EZE: { name: 'Buenos Aires - Ezeiza', city: 'Buenos Aires, Argentina' }\n};\n\nconst aliases = {\n  MED: 'MDE', MEDELLIN: 'MDE', 'MEDELLIN COLOMBIA': 'MDE',\n  CALI: 'CLO', 'SANTIAGO DE CALI': 'CLO', 'SANTIAGO DE CALI COLOMBIA': 'CLO',\n  BOGOTA: 'BOG', 'BOGOTA COLOMBIA': 'BOG',\n  'LOS ANGELES': 'LAX', 'LOS ANGELES ESTADOS UNIDOS': 'LAX',\n  MIAMI: 'MIA', MADRID: 'MAD', CARTAGENA: 'CTG', BARRANQUILLA: 'BAQ'\n};\n\nfunction cleanText(value) {\n  return String(value || '')\n    .normalize('NFD')\n    .replace(/[\\u0300-\\u036f]/g, '')\n    .toUpperCase()\n    .replace(/[^A-Z0-9\\s/-]/g, ' ')\n    .replace(/\\s+/g, ' ')\n    .trim();\n}\n\nfunction resolveAirport(value, fieldName) {\n  const raw = String(value || '').trim();\n  const fromDropdown = raw.match(/^([A-Za-z]{3})\\s*-/);\n  const directCode = raw.match(/^[A-Za-z]{3}$/);\n  let code = '';\n\n  if (fromDropdown) code = fromDropdown[1].toUpperCase();\n  else if (directCode) code = directCode[0].toUpperCase();\n  else code = aliases[cleanText(raw)] || '';\n\n  if (code === 'MED') code = 'MDE';\n\n  if (!code || !airportMap[code]) {\n    throw new Error(fieldName + ' no es un aeropuerto permitido o coherente: ' + raw + '. Usa una opcion de la lista desplegable.');\n  }\n\n  const info = airportMap[code];\n  return { input: raw, code, name: info.name, city: info.city };\n}\n\nconst origen = resolveAirport(base.origen_input, 'Origen');\nconst destino = resolveAirport(base.destino_input, 'Destino');\n\nif (origen.code === destino.code) {\n  throw new Error('Origen y destino no pueden ser el mismo aeropuerto: ' + origen.code);\n}\n\nconst route_key = [origen.code, destino.code, base.fecha_salida, base.fecha_regreso, base.moneda, base.adultos, base.ninos, base.infantes_con_asiento, base.infantes_en_brazos, base.lleva_maletas, base.maletas_de_mano]\n  .map(v => String(v || '').trim().toUpperCase())\n  .join('|');\n\nreturn [{ json: {\n  ...base,\n  route_key,\n  origen: origen.code,\n  origen_nombre: origen.name,\n  origen_tipo: 'airport',\n  origen_codigo_aeropuerto: origen.code,\n  destino: destino.code,\n  destino_nombre: destino.name,\n  destino_tipo: 'airport',\n  destino_codigo_aeropuerto: destino.code,\n  validacion_ubicaciones: 'ok_dropdown_iata_controlado'\n}}];"
+      },
+      "id": "resolver-ubicaciones-alta",
+      "name": "Resolver ubicaciones alta",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1020,
+        -220
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": "PEGA_AQUI_EL_ID_DE_TU_GOOGLE_SHEET",
+        "sheetName": "Rutas",
+        "columns": {
+          "mappingMode": "autoMapInputData"
+        },
+        "matchingColumns": [
+          "route_key"
+        ],
+        "options": {}
+      },
+      "id": "guardar-ruta",
+      "name": "Guardar ruta",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        -780,
+        -220
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZA_CON_TU_CREDENCIAL",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const j = $('Resolver ubicaciones alta').first().json;\nreturn [{ json: {\n  estado: 'ok',\n  mensaje: 'Monitoreo activado. Para recibir alertas, abre el enlace de Telegram una sola vez.',\n  route_key: j.route_key,\n  resumen: `${j.origen_input} -> ${j.origen_nombre} | ${j.destino_input} -> ${j.destino_nombre} | ${j.fecha_salida} / ${j.fecha_regreso}` ,\n  enlace_vinculacion_telegram: j.enlace_vinculacion_telegram\n}}];"
+      },
+      "id": "confirmar-alta",
+      "name": "Confirmar alta",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -540,
+        -220
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "daysInterval": 1,
+              "triggerAtHour": 7,
+              "triggerAtMinute": 0
+            }
+          ]
+        }
+      },
+      "id": "schedule-diario",
+      "name": "Ejecutar cada dia",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1500,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": "PEGA_AQUI_EL_ID_DE_TU_GOOGLE_SHEET",
+        "sheetName": "Rutas",
+        "options": {}
+      },
+      "id": "leer-rutas",
+      "name": "Leer rutas",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        -1260,
+        120
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZA_CON_TU_CREDENCIAL",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const airportMap = {\n  BOG: 'BOG', MDE: 'MDE', MED: 'MDE', CLO: 'CLO', CTG: 'CTG', BAQ: 'BAQ', PEI: 'PEI', BGA: 'BGA', SMR: 'SMR', ADZ: 'ADZ',\n  LAX: 'LAX', MIA: 'MIA', MAD: 'MAD', JFK: 'JFK', EWR: 'EWR', MEX: 'MEX', CUN: 'CUN', PTY: 'PTY', LIM: 'LIM', SCL: 'SCL', EZE: 'EZE'\n};\nconst aliases = {\n  MEDELLIN: 'MDE', 'MEDELLIN COLOMBIA': 'MDE', CALI: 'CLO', 'SANTIAGO DE CALI': 'CLO', 'SANTIAGO DE CALI COLOMBIA': 'CLO',\n  BOGOTA: 'BOG', 'BOGOTA COLOMBIA': 'BOG', 'LOS ANGELES': 'LAX', MIAMI: 'MIA', MADRID: 'MAD', CARTAGENA: 'CTG', BARRANQUILLA: 'BAQ'\n};\nfunction cleanText(value) {\n  return String(value || '').normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toUpperCase().replace(/[^A-Z0-9\\s/-]/g, ' ').replace(/\\s+/g, ' ').trim();\n}\nfunction resolveAirport(value, input) {\n  const raw = String(value || input || '').trim();\n  const fromDropdown = raw.match(/^([A-Za-z]{3})\\s*-/);\n  const directCode = raw.match(/^[A-Za-z]{3}$/);\n  let code = '';\n  if (fromDropdown) code = fromDropdown[1].toUpperCase();\n  else if (directCode) code = directCode[0].toUpperCase();\n  else code = aliases[cleanText(raw)] || '';\n  if (code === 'MED') code = 'MDE';\n  if (!airportMap[code]) return '';\n  return airportMap[code];\n}\nreturn $input.all()\n  .filter(item => String(item.json.activa || 'si').toLowerCase() !== 'no')\n  .flatMap(item => {\n    const j = item.json;\n    const origen = resolveAirport(j.origen, j.origen_input);\n    const destino = resolveAirport(j.destino, j.destino_input);\n    if (!origen || !destino || origen === destino) return [];\n    const adultos = Number(j.adultos || 1);\n    const ninos = Number(j.ninos || 0);\n    const infantes_con_asiento = Number(j.infantes_con_asiento || 0);\n    const infantes_en_brazos = Number(j.infantes_en_brazos || 0);\n    const lleva_maletas = String(j.lleva_maletas || 'no').trim().toLowerCase();\n    const maletas_de_mano = lleva_maletas === 'si' ? Number(j.maletas_de_mano || 0) : 0;\n    return [{ json: {\n      route_key: j.route_key,\n      nombre_cliente: j.nombre_cliente || '',\n      telefono_contacto: j.telefono_contacto || '',\n      origen_input: j.origen_input || j.origen,\n      origen,\n      origen_nombre: j.origen_nombre || '',\n      origen_tipo: 'airport',\n      origen_codigo_aeropuerto: origen,\n      destino_input: j.destino_input || j.destino,\n      destino,\n      destino_nombre: j.destino_nombre || '',\n      destino_tipo: 'airport',\n      destino_codigo_aeropuerto: destino,\n      fecha_salida: j.fecha_salida,\n      fecha_regreso: j.fecha_regreso,\n      moneda: j.moneda || 'COP',\n      adultos,\n      ninos,\n      infantes_con_asiento,\n      infantes_en_brazos,\n      total_pasajeros: adultos + ninos + infantes_con_asiento + infantes_en_brazos,\n      lleva_maletas,\n      maletas_de_mano,\n      max_escalas: Number(j.max_escalas ?? 99),\n      presupuesto_objetivo: j.presupuesto_objetivo ? Number(j.presupuesto_objetivo) : null,\n      chat_id_telegram: j.chat_id_telegram || '',\n      telegram_vinculado: j.telegram_vinculado || 'no',\n      activa: j.activa || 'si'\n    }}];\n  });"
+      },
+      "id": "normalizar-rutas",
+      "name": "Normalizar rutas",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1020,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://serpapi.com/search",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "engine",
+              "value": "google_flights"
+            },
+            {
+              "name": "departure_id",
+              "value": "={{ $json.origen }}"
+            },
+            {
+              "name": "arrival_id",
+              "value": "={{ $json.destino }}"
+            },
+            {
+              "name": "outbound_date",
+              "value": "={{ $json.fecha_salida }}"
+            },
+            {
+              "name": "return_date",
+              "value": "={{ $json.fecha_regreso }}"
+            },
+            {
+              "name": "currency",
+              "value": "={{ $json.moneda }}"
+            },
+            {
+              "name": "hl",
+              "value": "es"
+            },
+            {
+              "name": "gl",
+              "value": "co"
+            },
+            {
+              "name": "type",
+              "value": "1"
+            },
+            {
+              "name": "adults",
+              "value": "={{ $json.adultos }}"
+            },
+            {
+              "name": "children",
+              "value": "={{ $json.ninos }}"
+            },
+            {
+              "name": "infants_in_seat",
+              "value": "={{ $json.infantes_con_asiento }}"
+            },
+            {
+              "name": "infants_on_lap",
+              "value": "={{ $json.infantes_en_brazos }}"
+            },
+            {
+              "name": "bags",
+              "value": "={{ $json.maletas_de_mano }}"
+            },
+            {
+              "name": "sort_by",
+              "value": "2"
+            },
+            {
+              "name": "deep_search",
+              "value": "true"
+            },
+            {
+              "name": "api_key",
+              "value": "PEGA_AQUI_TU_SERPAPI_KEY"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "buscar-vuelos",
+      "name": "SerpApi - Buscar vuelos",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -780,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const responses = $input.all();\nconst rutas = $('Normalizar rutas').all();\n\nfunction toNumber(value) {\n  if (value === null || value === undefined || value === '') return null;\n  if (typeof value === 'number') return value;\n  const cleaned = String(value).replace(/[^0-9.]/g, '');\n  return cleaned ? Number(cleaned) : null;\n}\n\nreturn responses.flatMap((item, index) => {\n  const ruta = rutas[index]?.json || {};\n  const payload = item.json;\n\n  const ofertas = [\n    ...(payload.best_flights || []),\n    ...(payload.other_flights || [])\n  ]\n    .map(f => {\n      const escalas = f.layovers?.length || 0;\n      const precio = toNumber(f.price);\n      return {\n        ...f,\n        escalas,\n        precio_normalizado: precio,\n        aerolinea_reserva: (f.flights || []).map(x => x.airline).filter(Boolean).join(' / ')\n      };\n    })\n    .filter(f => f.flights?.length)\n    .filter(f => f.escalas <= ruta.max_escalas)\n    .sort((a, b) => {\n      const pa = a.precio_normalizado ?? 999999999;\n      const pb = b.precio_normalizado ?? 999999999;\n      return pa - pb;\n    });\n\n  const mejor = ofertas[0];\n\n  if (!mejor) {\n    return [{\n      json: {\n        ...ruta,\n        estado_busqueda: 'sin_resultados',\n        precio_actual: null,\n        aerolinea_reserva: '',\n        duracion_minutos: '',\n        escalas: '',\n        booking_token: '',\n        tiene_booking_token: false,\n        enlace_google_flights: payload.search_metadata?.google_flights_url || '',\n        mensaje: 'SerpApi devolvio respuesta, pero no se encontraron vuelos compatibles con los filtros.'\n      }\n    }];\n  }\n\n  return [{\n    json: {\n      ...ruta,\n      estado_busqueda: 'ok',\n      precio_actual: mejor.precio_normalizado,\n      aerolinea_reserva: mejor.aerolinea_reserva,\n      duracion_minutos: mejor.total_duration || '',\n      escalas: mejor.escalas,\n      booking_token: mejor.booking_token || '',\n      tiene_booking_token: Boolean(mejor.booking_token),\n      enlace_google_flights: payload.search_metadata?.google_flights_url || ''\n    }\n  }];\n});"
+      },
+      "id": "elegir-mejor-oferta",
+      "name": "Elegir mejor oferta",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -540,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": "PEGA_AQUI_EL_ID_DE_TU_GOOGLE_SHEET",
+        "sheetName": "MejoresPrecios",
+        "options": {}
+      },
+      "id": "leer-mejores-precios",
+      "name": "Leer mejores precios",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        -300,
+        120
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZA_CON_TU_CREDENCIAL",
+          "name": "Google Sheets account"
+        }
+      },
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const ofertas = $('Elegir mejor oferta').all().map(i => i.json);\n\nconst mejores = $input.all()\n  .map(i => i.json)\n  .filter(r => r.route_key);\n\nconst byKey = new Map(mejores.map(r => [r.route_key, r]));\n\nreturn ofertas.map(oferta => {\n  const anterior = byKey.get(oferta.route_key);\n\n  const precio_anterior = anterior?.mejor_precio ? Number(anterior.mejor_precio) : null;\n\n  const precio_actual = oferta.precio_actual !== null && oferta.precio_actual !== undefined\n    ? Number(oferta.precio_actual)\n    : null;\n\n  const nuevo_mejor = precio_actual !== null &&\n    (precio_anterior === null || precio_actual < precio_anterior);\n\n  const debajo_objetivo = precio_actual !== null &&\n    oferta.presupuesto_objetivo !== null &&\n    oferta.presupuesto_objetivo !== undefined &&\n    Number(oferta.presupuesto_objetivo) > 0 &&\n    precio_actual <= Number(oferta.presupuesto_objetivo);\n\n  const telegram_listo = Boolean(oferta.chat_id_telegram) &&\n    String(oferta.telegram_vinculado || '').toLowerCase() === 'si';\n\n  return {\n    json: {\n      ...oferta,\n      precio_anterior,\n      precio_actual,\n      nuevo_mejor,\n      debajo_objetivo,\n      telegram_listo,\n      enviar_alerta: telegram_listo && (nuevo_mejor || debajo_objetivo)\n    }\n  };\n});"
+      },
+      "id": "comparar-contra-memoria",
+      "name": "Comparar contra memoria",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -60,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://serpapi.com/search",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "engine",
+              "value": "google_flights"
+            },
+            {
+              "name": "booking_token",
+              "value": "={{ $json.booking_token }}"
+            },
+            {
+              "name": "currency",
+              "value": "={{ $json.moneda }}"
+            },
+            {
+              "name": "hl",
+              "value": "es"
+            },
+            {
+              "name": "gl",
+              "value": "co"
+            },
+            {
+              "name": "api_key",
+              "value": "PEGA_AQUI_TU_SERPAPI_KEY"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "obtener-opciones-reserva",
+      "name": "SerpApi - Opciones de reserva",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        420,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const reservas = $input.all();\nconst comparadas = $('Comparar contra memoria').all();\nreturn reservas.map((item, index) => {\n  const base = comparadas[index].json;\n  const option = item.json.booking_options?.[0] || {};\n  const enlace_pago = option?.booking_request?.url || option?.url || '';\n  return { json: {\n    fecha_consulta: new Date().toISOString(),\n    route_key: base.route_key, nombre_cliente: base.nombre_cliente, origen_input: base.origen_input, origen: base.origen, origen_nombre: base.origen_nombre, origen_tipo: base.origen_tipo, origen_codigo_aeropuerto: base.origen_codigo_aeropuerto, destino_input: base.destino_input, destino: base.destino, destino_nombre: base.destino_nombre, destino_tipo: base.destino_tipo, destino_codigo_aeropuerto: base.destino_codigo_aeropuerto, fecha_salida: base.fecha_salida, fecha_regreso: base.fecha_regreso, moneda: base.moneda,\n    adultos: base.adultos, ninos: base.ninos, infantes_con_asiento: base.infantes_con_asiento, infantes_en_brazos: base.infantes_en_brazos, total_pasajeros: base.total_pasajeros,\n    lleva_maletas: base.lleva_maletas, maletas_de_mano: base.maletas_de_mano, precio_actual: base.precio_actual, precio_anterior: base.precio_anterior,\n    aerolinea_reserva: base.aerolinea_reserva, duracion_minutos: base.duracion_minutos, escalas: base.escalas, proveedor_reserva: option?.book_with || option?.provider || '',\n    enlace_pago, enlace_google_flights: base.enlace_google_flights, nuevo_mejor: base.nuevo_mejor, debajo_objetivo: base.debajo_objetivo, enviar_alerta: base.enviar_alerta, chat_id_telegram: base.chat_id_telegram, telegram_vinculado: base.telegram_vinculado, telefono_contacto: base.telefono_contacto\n  }};\n});"
+      },
+      "id": "preparar-salida",
+      "name": "Preparar salida",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        660,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": "PEGA_AQUI_EL_ID_DE_TU_GOOGLE_SHEET",
+        "sheetName": "Historial",
+        "columns": {
+          "mappingMode": "autoMapInputData"
+        },
+        "options": {}
+      },
+      "id": "guardar-historial",
+      "name": "Guardar historial",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        900,
+        20
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZA_CON_TU_CREDENCIAL",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return $input.all().map(item => {\n  const j = item.json;\n  return { json: {\n    route_key: j.route_key, nombre_cliente: j.nombre_cliente, telefono_contacto: j.telefono_contacto, origen_input: j.origen_input, origen: j.origen, origen_nombre: j.origen_nombre, origen_tipo: j.origen_tipo, origen_codigo_aeropuerto: j.origen_codigo_aeropuerto, destino_input: j.destino_input, destino: j.destino, destino_nombre: j.destino_nombre, destino_tipo: j.destino_tipo, destino_codigo_aeropuerto: j.destino_codigo_aeropuerto, fecha_salida: j.fecha_salida, fecha_regreso: j.fecha_regreso, moneda: j.moneda,\n    adultos: j.adultos, ninos: j.ninos, infantes_con_asiento: j.infantes_con_asiento, infantes_en_brazos: j.infantes_en_brazos, total_pasajeros: j.total_pasajeros,\n    lleva_maletas: j.lleva_maletas, maletas_de_mano: j.maletas_de_mano, mejor_precio: j.precio_actual, ultima_actualizacion: j.fecha_consulta,\n    aerolinea_reserva: j.aerolinea_reserva, proveedor_reserva: j.proveedor_reserva, enlace_pago: j.enlace_pago\n  }};\n});"
+      },
+      "id": "preparar-mejores-precios",
+      "name": "Preparar mejores precios",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        900,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": "PEGA_AQUI_EL_ID_DE_TU_GOOGLE_SHEET",
+        "sheetName": "MejoresPrecios",
+        "columns": {
+          "mappingMode": "autoMapInputData"
+        },
+        "matchingColumns": [
+          "route_key"
+        ],
+        "options": {}
+      },
+      "id": "actualizar-mejores-precios",
+      "name": "Actualizar mejores precios",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        1140,
+        220
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZA_CON_TU_CREDENCIAL",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "alerta-si",
+              "leftValue": "={{ $json.enviar_alerta }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "enviar-alerta-if",
+      "name": "Enviar alerta?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        900,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{ $json.chat_id_telegram }}",
+        "text": "=Nueva mejor opcion de vuelo\n\nCliente: {{$json.nombre_cliente || 'N/A'}}\nRuta solicitada: {{$json.origen_input}} -> {{$json.destino_input}}\nRuta validada: {{$json.origen_nombre}} -> {{$json.destino_nombre}}\nFechas: {{$json.fecha_salida}} / {{$json.fecha_regreso}}\nPasajeros: {{$json.total_pasajeros}} ({{$json.adultos}} adulto(s), {{$json.ninos}} nino(s), {{$json.infantes_con_asiento + $json.infantes_en_brazos}} infante(s))\nLleva maletas: {{$json.lleva_maletas}}\nMaletas de mano: {{$json.maletas_de_mano}}\nPrecio actual: {{$json.moneda}} {{$json.precio_actual}}\nPrecio anterior: {{$json.precio_anterior || 'sin historico'}}\nAerolinea de reserva: {{$json.aerolinea_reserva}}\nProveedor de reserva: {{$json.proveedor_reserva || 'N/D'}}\nEscalas: {{$json.escalas}}\n\nPagar / reservar: {{$json.enlace_pago || $json.enlace_google_flights}}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "telegram-alerta-precio",
+      "name": "Telegram - Alerta de precio",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1140,
+        420
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "REEMPLAZA_CON_TU_CREDENCIAL",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "id": "telegram-trigger-vinculacion",
+      "name": "Telegram Trigger - Vinculacion",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1500,
+        520
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "REEMPLAZA_CON_TU_CREDENCIAL",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const msg = $json.message || {};\nconst texto = String(msg.text || '').trim();\nconst match = texto.match(/^\\/start\\s+([A-Za-z0-9_-]{1,64})$/);\nif (!match) return [];\nreturn [{ json: { registro_token: match[1], chat_id_telegram: String(msg.chat?.id || ''), telegram_user_id: String(msg.from?.id || ''), telegram_username: msg.from?.username || '', fecha_vinculacion_telegram: new Date().toISOString() }}];"
+      },
+      "id": "procesar-vinculacion-telegram",
+      "name": "Procesar vinculacion Telegram",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1260,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": "PEGA_AQUI_EL_ID_DE_TU_GOOGLE_SHEET",
+        "sheetName": "Rutas",
+        "options": {}
+      },
+      "id": "leer-rutas-vinculacion",
+      "name": "Leer rutas para vinculacion",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        -1020,
+        520
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZA_CON_TU_CREDENCIAL",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const incoming = $('Procesar vinculacion Telegram').first().json;\nconst row = $input.all().map(i => i.json).find(r => String(r.registro_token || '') === incoming.registro_token);\nif (!row) throw new Error('Token de vinculacion no encontrado o vencido.');\nreturn [{ json: { ...row, chat_id_telegram: incoming.chat_id_telegram, telegram_user_id: incoming.telegram_user_id, telegram_username: incoming.telegram_username, telegram_vinculado: 'si', fecha_vinculacion_telegram: incoming.fecha_vinculacion_telegram }}];"
+      },
+      "id": "unir-vinculacion-telegram",
+      "name": "Unir vinculacion Telegram",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -780,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": "PEGA_AQUI_EL_ID_DE_TU_GOOGLE_SHEET",
+        "sheetName": "Rutas",
+        "columns": {
+          "mappingMode": "autoMapInputData"
+        },
+        "matchingColumns": [
+          "route_key"
+        ],
+        "options": {}
+      },
+      "id": "actualizar-ruta-vinculada",
+      "name": "Actualizar ruta vinculada",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        -540,
+        520
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REEMPLAZA_CON_TU_CREDENCIAL",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{ $json.chat_id_telegram }}",
+        "text": "=Listo. Tu Telegram quedo vinculado y recibiras alertas cuando aparezca una mejor opcion de vuelo.",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "confirmar-vinculacion-telegram",
+      "name": "Telegram - Confirmar vinculacion",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -300,
+        520
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "REEMPLAZA_CON_TU_CREDENCIAL",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "booking-token-si",
+              "leftValue": "={{ $json.tiene_booking_token }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-tiene-booking-token",
+      "name": "Tiene booking token?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        120,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $input.all().map(item => {\n  const base = item.json;\n\n  return {\n    json: {\n      fecha_consulta: new Date().toISOString(),\n      route_key: base.route_key,\n      nombre_cliente: base.nombre_cliente,\n      telefono_contacto: base.telefono_contacto,\n\n      origen_input: base.origen_input,\n      origen: base.origen,\n      origen_nombre: base.origen_nombre,\n      origen_tipo: base.origen_tipo,\n      origen_codigo_aeropuerto: base.origen_codigo_aeropuerto,\n\n      destino_input: base.destino_input,\n      destino: base.destino,\n      destino_nombre: base.destino_nombre,\n      destino_tipo: base.destino_tipo,\n      destino_codigo_aeropuerto: base.destino_codigo_aeropuerto,\n\n      fecha_salida: base.fecha_salida,\n      fecha_regreso: base.fecha_regreso,\n      moneda: base.moneda,\n\n      adultos: base.adultos,\n      ninos: base.ninos,\n      infantes_con_asiento: base.infantes_con_asiento,\n      infantes_en_brazos: base.infantes_en_brazos,\n      total_pasajeros: base.total_pasajeros,\n\n      lleva_maletas: base.lleva_maletas,\n      maletas_de_mano: base.maletas_de_mano,\n\n      precio_actual: base.precio_actual,\n      precio_anterior: base.precio_anterior,\n\n      aerolinea_reserva: base.aerolinea_reserva,\n      duracion_minutos: base.duracion_minutos,\n      escalas: base.escalas,\n\n      proveedor_reserva: 'Google Flights',\n      enlace_pago: base.enlace_google_flights || '',\n      enlace_google_flights: base.enlace_google_flights || '',\n\n      nuevo_mejor: base.nuevo_mejor,\n      debajo_objetivo: base.debajo_objetivo,\n      telegram_listo: base.telegram_listo,\n      enviar_alerta: base.enviar_alerta,\n\n      chat_id_telegram: base.chat_id_telegram,\n      telegram_vinculado: base.telegram_vinculado,\n\n      tiene_booking_token: false,\n      nota_reserva: 'No hubo booking_token. Se usa enlace de Google Flights como respaldo.'\n    }\n  };\n});"
+      },
+      "id": "preparar-salida-fallback",
+      "name": "Preparar salida fallback",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        420,
+        360
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Formulario de alta": {
+      "main": [
+        [
+          {
+            "node": "Normalizar alta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalizar alta": {
+      "main": [
+        [
+          {
+            "node": "Resolver ubicaciones alta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar ruta": {
+      "main": [
+        [
+          {
+            "node": "Confirmar alta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ejecutar cada dia": {
+      "main": [
+        [
+          {
+            "node": "Leer rutas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer rutas": {
+      "main": [
+        [
+          {
+            "node": "Normalizar rutas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalizar rutas": {
+      "main": [
+        [
+          {
+            "node": "SerpApi - Buscar vuelos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SerpApi - Buscar vuelos": {
+      "main": [
+        [
+          {
+            "node": "Elegir mejor oferta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Elegir mejor oferta": {
+      "main": [
+        [
+          {
+            "node": "Leer mejores precios",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer mejores precios": {
+      "main": [
+        [
+          {
+            "node": "Comparar contra memoria",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Comparar contra memoria": {
+      "main": [
+        [
+          {
+            "node": "Tiene booking token?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SerpApi - Opciones de reserva": {
+      "main": [
+        [
+          {
+            "node": "Preparar salida",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar salida": {
+      "main": [
+        [
+          {
+            "node": "Guardar historial",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Preparar mejores precios",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Enviar alerta?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar mejores precios": {
+      "main": [
+        [
+          {
+            "node": "Actualizar mejores precios",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar alerta?": {
+      "main": [
+        [
+          {
+            "node": "Telegram - Alerta de precio",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Resolver ubicaciones alta": {
+      "main": [
+        [
+          {
+            "node": "Guardar ruta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger - Vinculacion": {
+      "main": [
+        [
+          {
+            "node": "Procesar vinculacion Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Procesar vinculacion Telegram": {
+      "main": [
+        [
+          {
+            "node": "Leer rutas para vinculacion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer rutas para vinculacion": {
+      "main": [
+        [
+          {
+            "node": "Unir vinculacion Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Unir vinculacion Telegram": {
+      "main": [
+        [
+          {
+            "node": "Actualizar ruta vinculada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Actualizar ruta vinculada": {
+      "main": [
+        [
+          {
+            "node": "Telegram - Confirmar vinculacion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tiene booking token?": {
+      "main": [
+        [
+          {
+            "node": "SerpApi - Opciones de reserva",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Preparar salida fallback",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar salida fallback": {
+      "main": [
+        [
+          {
+            "node": "Guardar historial",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Preparar mejores precios",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Enviar alerta?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Bogota"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}
